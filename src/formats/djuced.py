@@ -17,6 +17,27 @@ from formats._djuced import (
 
 
 def parse_db(fname: str) -> structs.Library:
+    """Parse the DJUCED database and return the created library.
+    
+    Some database fields are ignored as we don't know their use:
+    
+    - trackBeats.timesignature
+    - tracks.smart_advisor
+    - tracks.max_val_gain
+    - tracks.rating
+    - tracks.danceability
+    - tracks.scores
+    
+    Other data that is discarded as its use is unknown or not applicable
+    to other programs:
+    
+    - Cues with numbers >= 1000
+    - Party playlists
+    - Recordings
+    - tblAdmin, tblFolderScan
+    
+    :param fname: The file name of the DJUCED database to read.
+    """
     conn = sqlite3.connect(fname)
     cursor = conn.cursor()
 

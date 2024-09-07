@@ -36,7 +36,7 @@ def get_starts(cursor: sqlite3.Cursor) -> dict:
     return starts
 
 
-def get_cues(cursor: sqlite3.Cursor) -> (dict, dict):
+def get_cues(cursor: sqlite3.Cursor) -> tuple[dict, dict]:
     """Get the cue points for each track from trackCues.
     Cue points are separated into cue 0 (hitting the "CUE" button)
     and the hot cues (1-8).
@@ -71,7 +71,7 @@ def get_cues(cursor: sqlite3.Cursor) -> (dict, dict):
 
 def get_tracks(
     cursor: sqlite3.Cursor, starts: dict, hot_cues: dict, cues: dict
-) -> (List[structs.Track], dict):
+) -> tuple[List[structs.Track], dict]:
     """Get the tracks from tracks, as well as their IDs indexed by their
     file path.
 
@@ -109,10 +109,10 @@ def get_tracks(
                 first_beat_position=starts[track[16]] if track[16] in starts else 0,
                 hot_cues=hot_cues[track[16]] if track[16] in hot_cues else [],
                 cue=cues[track[16]] if track[16] in cues else None,
-                key=track[18],  # TODO
+                key=int(track[18]) if track[18] != "" else 0,
                 genre=track[19],
                 filesize=track[20],
-                length=track[21],
+                length=int(track[21]) if track[21] != "" else None,
                 last_modified=track[23],
                 # just say -01-01, we don't know the actual date
                 release_date=str(track[24]) + "-01-01",

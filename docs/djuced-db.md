@@ -24,7 +24,7 @@ Playlist data. Contains both an entry for each playlist and an entry for each pl
 | column | description | note |
 | ------ | ----------- | ---- |
 | name | name of the playlist | also used to associate playlists and entries |
-| path | always set to '#' | purpose unknown (yet) |
+| path | path for playlist | folder path playlist is in. # for playlists in the top path, #/folder/folder2 for playlists in folder/folder2. song entries match playlist's folder. |
 | data | full file path to the song | empty for playlist entries |
 | order_in_list | sort order | sort order of playlists in playlist view, or entries in playlist. |
 | type | number denoting the type | 0 for playlist, 3 for playlist entries. 5 for DJUCED parties. |
@@ -156,4 +156,4 @@ Colors for cue points are hardcoded. The following values exist:
 
 Song keys are stored as a number between 0 and 23.
 0-11 represent major keys (from 0 for A major to 11 for G# major),
-12-23 represent minor keys (from 0 for A minor to 11 for G# minor).
+12-23 represent minor keys (from 12 for A minor to 23 for G# minor).

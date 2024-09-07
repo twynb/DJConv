@@ -1,15 +1,15 @@
 import formats.djuced
-import formats.rekordbox
+import formats.rekordbox_xml
 import argparse
 
-allowed_formats = ["djuced", "rekordbox", "rb"]
+allowed_formats = ["djuced", "rekordboxxml"]
 parser_functions = {
     "djuced": formats.djuced.parse_db,
-    "rekordbox": formats.rekordbox.parse_db,
+    "rekordboxxml": formats.rekordbox_xml.parse_db
 }
 writer_functions = {
     "djuced": formats.djuced.write_db,
-    "rekordbox": formats.rekordbox.write_db,
+    "rekordboxxml": formats.rekordbox_xml.write_db
 }
 
 parser = argparse.ArgumentParser()
